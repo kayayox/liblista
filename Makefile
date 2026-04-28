@@ -34,6 +34,7 @@ LIBRARY = $(LIB_DIR)/liblista.a
 TARGET = $(BIN_DIR)/test_liblista
 EXAMPLE = $(BIN_DIR)/example
 EXAMPLE1 = $(BIN_DIR)/example1
+EXAMPLE2 = $(BIN_DIR)/example2
 
 .PHONY: all clean test install uninstall examples
 
@@ -55,8 +56,13 @@ $(EXAMPLE): examples/example.c $(LIBRARY) | $(BIN_DIR)
 	@echo "Ejemplo creado: $(EXAMPLE)"
 
 $(EXAMPLE1): examples/example1.c $(LIBRARY) | $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $@ examples/example.c -L$(LIB_DIR) -llista
+	$(CC) $(CFLAGS) -o $@ examples/example1.c -L$(LIB_DIR) -llista
 	@echo "Ejemplo de persona creado: $(EXAMPLE1)"
+
+$(EXAMPLE2): examples/example2.c $(LIBRARY) | $(BIN_DIR)
+	$(CC) $(CFLAGS) -o $@ examples/example2.c -L$(LIB_DIR) -llista
+
+examples: $(EXAMPLE) $(EXAMPLE1) $(EXAMPLE2)
 
 # Reglas para compilar los archivos de la librería
 $(OBJ_DIR)/lista.o: $(LISTA_SRC) | $(OBJ_DIR)
@@ -97,6 +103,11 @@ $(LIB_DIR):
 test: $(TARGET)
 	@echo "Ejecutando pruebas..."
 	./$(TARGET)
+
+# Análisis de memoria con Valgrind
+valgrind: $(TARGET)
+	@echo "Ejecutando análisis de memoria con Valgrind..."
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET)
 
 # Ejemplos
 examples: $(EXAMPLE) $(EXAMPLE1)
