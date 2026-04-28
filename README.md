@@ -1,5 +1,7 @@
 # Librería de Lista Enlazada en C
 
+![CI Status](https://github.com/kayayox/liblista/actions/workflows/test.yml/badge.svg)
+
 Una implementación profesional de lista enlazada simple en C con iteradores y operaciones funcionales.
 
 ## Características
