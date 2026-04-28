@@ -1,0 +1,27 @@
+name: CI - Tests y Análisis de Memoria
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Obtener el código
+      uses: actions/checkout@v4
+
+    - name: Instalar herramientas
+      run: sudo apt-get update && sudo apt-get install -y valgrind
+
+    - name: Compilar librería y pruebas
+      run: make all
+
+    - name: Ejecutar pruebas
+      run: make test
+
+    - name: Verificar fugas de memoria (Valgrind)
+      run: make valgrind
