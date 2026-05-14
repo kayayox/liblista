@@ -17,6 +17,7 @@ Una implementación profesional de lista enlazada simple en C con iteradores y o
 - **Documentación completa** en formato Doxygen
 
 ## Estructura del proyecto
+...
 
 liblista/
 ├── include/                 # Headers públicos
@@ -51,7 +52,7 @@ liblista/
 │   ├── ejemplo_complejo.c
 │   └── ejemplo_persona.c
 └── README.md
-
+...
 ## Uso básico
 
 ### Creación de lista
